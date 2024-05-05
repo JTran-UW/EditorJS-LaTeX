@@ -62,8 +62,10 @@ class EJLaTeX {
         input.addEventListener("keydown", (e)=> {
             if (e.shiftKey && e.key === "Enter") {
                 e.preventDefault();
-                input.value = input.value.substring(0, input.selectionEnd) + "\n" +
-                              input.value.substring(input.selectionEnd);
+                let end = input.selectionEnd;
+                input.value = input.value.substring(0, end) + "\n" +
+                              input.value.substring(end);
+                input.selectionEnd = end + 1;
             }
         });
 
