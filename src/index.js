@@ -24,7 +24,7 @@ class EJLaTeX {
     render() {
         const wrapper = document.createElement('div');
         const preview = document.createElement('p');
-        const input = document.createElement('input');
+        const input = document.createElement('textarea');
         if (typeof katex === "undefined") {
             let errorMessageSpan = document.createElement("span");
             errorMessageSpan.className = "errorMessage";
@@ -56,6 +56,14 @@ class EJLaTeX {
             katex.render(input.value, preview, {
                 throwOnError: false
             });
+        });
+        
+        // Multiline support
+        input.addEventListener("keydown", (e)=> {
+            if (e.shiftKey && e.key === "Enter") {
+                e.preventDefault();
+                input.value += "\n";
+            }
         });
 
         wrapper.appendChild(preview);
