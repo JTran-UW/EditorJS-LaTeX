@@ -6,8 +6,9 @@ const katex = require('katex');
     Adds LaTex block support to EditorJS
 */
 class EJLaTeX {
-    constructor({ data, config }) {
+    constructor({ data, config, readOnly }) {
         this.data = data.math;
+        this.readOnly = readOnly;
 
         if (config && config.css) {
             this.addCss(config.css);
@@ -24,7 +25,7 @@ class EJLaTeX {
     render() {
         const wrapper = document.createElement('div');
         const preview = document.createElement('p');
-        const input = document.createElement('textarea');
+        const input = !this.readOnly ? document.createElement('textarea') : null;
         if (typeof katex === "undefined") {
             let errorMessageSpan = document.createElement("span");
             errorMessageSpan.className = "errorMessage";
