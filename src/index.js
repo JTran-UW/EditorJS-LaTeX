@@ -25,7 +25,10 @@ class EJLaTeX {
     render() {
         const wrapper = document.createElement('div');
         const preview = document.createElement('p');
-        const input = !this.readOnly ? document.createElement('textarea') : null;
+        const input = document.createElement('textarea')
+        if (this.readOnly) {
+            input.style.display = "none";
+        }
         if (typeof katex === "undefined") {
             let errorMessageSpan = document.createElement("span");
             errorMessageSpan.className = "errorMessage";
